@@ -1,50 +1,41 @@
-import json 
+import json
 import pickle
 import numpy as np
 
-__locations = None
-__data_columns = None
 __model = None
+__data_columns = None
 
-# for getting the estimated price using model
-def get_estimated_price(location, sqft, bhk, bath):
+# for predicting disease
+def predict_disease(jaundice, fatigue, discomfort, appetite, urine, itchy_skin, bruising, nausea_vomiting, smoking_status, alcohol_consumption):
     try:
-        loc_index = __data_columns.index(location.lower())
+        x = np.zeros(len(__data_columns))
+        x[0] = jaundice
+        x[1] = fatigue
+        x[2] = discomfort
+        x[3] = alcohol_consumption
+        x[4] = smoking_status
+        x[5] = appetite
+        x[6] = urine
+        x[7] = itchy_skin
+        x[8] = bruising
+        x[9] = nausea_vomiting
+
+        return round(__model.predict([x])[0], 2)
     except:
-        loc_index = -1
+        return "Error occurred while predicting liver disease."
 
-    x = np.zeros(len(__data_columns))
-    x[0] = sqft
-    x[1] = bath
-    x[2] = bhk
-    if loc_index >= 0:
-        x[loc_index] = 1
-    
-    return round(__model.predict([x])[0], 2)
-
-# for getting the location names
-def get_location_names():
-    return __locations
-
-# for loading the saved artifacts
-def load_saved_artifacts():
-    print("loading saved artifacts ... start")
-    global __locations
-    global __data_columns
+# for loading the saved models
+def load_saved_models():
     global __model
+    global __data_columns
     
-    with open("./server/artifacts/columns.json", "r") as f:
+    with open("./model/columns.json", "r") as f:
         __data_columns = json.load(f)['data_columns']
-        __locations = __data_columns[3:]
-    
-    with open("./server/artifacts/realestate_price_prediction.pickle", "rb") as f:
+
+    with open("./model/liver_disease_prediction.pickle", "rb") as f:
         __model = pickle.load(f)
-
-    print("loading saved artifacts ... done")
-
 
 # main function
 if __name__ == "__main__":
-    load_saved_artifacts()
-    print(get_location_names())
-    print(get_estimated_price('Kalhalli', 1000, 2, 2))
+    load_saved_models()
+    print(predict_disease(1, 1, 1, 1, 1, 1, 1, 1, 0, 2))

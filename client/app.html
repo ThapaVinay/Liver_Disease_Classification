@@ -1,53 +1,204 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Real Estate Price Prediction</title>
+  <head>
+    <title>Liver Disease Prediction</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="app.js"></script>
-	<link rel="stylesheet" href="app.css">
-</head>
-<body>
-<div class="img"></div>
-<form class="form">
-	<h2>Area (Square Feet)</h2>
-    <input class="area"  type="text" id="uiSqft" class="floatLabel" name="Squareft" value="1000">
-	<h2>BHK</h2>
-	<div class="switch-field">
-		<input type="radio" id="radio-bhk-1" name="uiBHK" value="1"/>
-		<label for="radio-bhk-1">1</label>
-		<input type="radio" id="radio-bhk-2" name="uiBHK" value="2" checked/>
-		<label for="radio-bhk-2">2</label>
-		<input type="radio" id="radio-bhk-3" name="uiBHK" value="3"/>
-		<label for="radio-bhk-3">3</label>
-		<input type="radio" id="radio-bhk-4" name="uiBHK" value="4"/>
-		<label for="radio-bhk-4">4</label>
-		<input type="radio" id="radio-bhk-5" name="uiBHK" value="5"/>
-		<label for="radio-bhk-5">5</label>
-	</div>
-	</form>
-<form class="form">
-	<h2>Bath</h2>
-	<div class="switch-field">
-		<input type="radio" id="radio-bath-1" name="uiBathrooms" value="1"/>
-		<label for="radio-bath-1">1</label>
-		<input type="radio" id="radio-bath-2" name="uiBathrooms" value="2" checked/>
-		<label for="radio-bath-2">2</label>
-		<input type="radio" id="radio-bath-3" name="uiBathrooms" value="3"/>
-		<label for="radio-bath-3">3</label>
-		<input type="radio" id="radio-bath-4" name="uiBathrooms" value="4"/>
-		<label for="radio-bath-4">4</label>
-		<input type="radio" id="radio-bath-5" name="uiBathrooms" value="5"/>
-		<label for="radio-bath-5">5</label>
-	</div>
-		<h2>Location</h2>
-	<div>
-  <select class="location" name="" id="uiLocations">
-    <option value="" disabled="disabled" selected="selected">Choose a Location</option>
-		<option>Electronic City</option>
-        <option>Rajaji Nagar</option>
-  </select>
-</div>
-	<button class="submit" onclick="onClickedEstimatePrice()" type="button">Estimate Price</button>
-	<div id="uiEstimatedPrice" class="result">	<h2></h2> </div>
-</body>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div class="img"></div>
+    <form class="form">
+      <h2 class="heading">Liver Disease Prediction</h2>
+
+      <!-- Jaundice -->
+      <h2>Jaundice</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-jaundice-1" name="uijaundice" value="1" />
+        <label for="radio-jaundice-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-jaundice-2"
+          name="uijaundice"
+          value="2"
+          checked
+        />
+        <label for="radio-jaundice-2">No</label>
+      </div>
+
+      <!-- Fatique -->
+      <h2>Fatigue/Weakness</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-Fatigue-1" name="uiFatigue" value="1" />
+        <label for="radio-Fatigue-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-Fatigue-2"
+          name="uiFatigue"
+          value="2"
+          checked
+        />
+        <label for="radio-Fatigue-2">No</label>
+      </div>
+
+      <!-- Abdominal Pain/Discomfort -->
+      <h2>Abdominal Pain/Discomfort</h2>
+      <div class="switch-field">
+        <input
+          type="radio"
+          id="radio-Discomfort-1"
+          name="uiDiscomfort"
+          value="1"
+        />
+        <label for="radio-Discomfort-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-Discomfort-2"
+          name="uiDiscomfort"
+          value="2"
+          checked
+        />
+        <label for="radio-Discomfort-2">No</label>
+      </div>
+
+      <h2>Loss of Appetite</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-appetite-1" name="uiAppetite" value="1" />
+        <label for="radio-appetite-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-appetite-2"
+          name="uiAppetite"
+          value="2"
+          checked
+        />
+        <label for="radio-appetite-2">No</label>
+      </div>
+
+      <!-- Dark Urine -->
+      <h2>Dark Urine</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-urine-1" name="uiUrine" value="1" />
+        <label for="radio-urine-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-urine-2"
+          name="uiUrine"
+          value="2"
+          checked
+        />
+        <label for="radio-urine-2">No</label>
+      </div>
+
+      <!-- Itchy Skin -->
+      <h2>Itchy Skin</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-itchy-1" name="uiItchySkin" value="1" />
+        <label for="radio-itchy-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-itchy-2"
+          name="uiItchySkin"
+          value="2"
+          checked
+        />
+        <label for="radio-itchy-2">No</label>
+      </div>
+
+      <!-- Easy Bruising/Bleeding -->
+      <h2>Easy Bruising/Bleeding</h2>
+      <div class="switch-field">
+        <input type="radio" id="radio-bruising-1" name="uiBruising" value="1" />
+        <label for="radio-bruising-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-bruising-2"
+          name="uiBruising"
+          value="2"
+          checked
+        />
+        <label for="radio-bruising-2">No</label>
+      </div>
+
+      <!-- Nausea/Vomiting -->
+      <h2>Nausea/Vomiting</h2>
+      <div class="switch-field">
+        <input
+          type="radio"
+          id="radio-nausea-1"
+          name="uiNauseaVomiting"
+          value="1"
+        />
+        <label for="radio-nausea-1">Yes</label>
+        <input
+          type="radio"
+          id="radio-nausea-2"
+          name="uiNauseaVomiting"
+          value="2"
+          checked
+        />
+        <label for="radio-nausea-2">No</label>
+      </div>
+
+      <!-- Smoking status -->
+      <h2>Smoking Status</h2>
+      <div class="switch-field">
+        <input
+          type="radio"
+          id="radio-smoking-sometimes"
+          name="uiSmokingStatus"
+          value="sometimes"
+        />
+        <label for="radio-smoking-sometimes">Sometimes</label>
+        <input
+          type="radio"
+          id="radio-smoking-no"
+          name="uiSmokingStatus"
+          value="no"
+          checked
+        />
+        <label for="radio-smoking-no">No</label>
+        <input
+          type="radio"
+          id="radio-smoking-frequent"
+          name="uiSmokingStatus"
+          value="frequent"
+        />
+        <label for="radio-smoking-frequent">Frequent</label>
+      </div>
+
+      <!-- Alcohol Consumption-->
+      <h2>Alcohol Consumption</h2>
+      <div class="switch-field">
+        <input
+          type="radio"
+          id="radio-alcohol-sometimes"
+          name="uiAlcoholConsumption"
+          value="sometimes"
+        />
+        <label for="radio-alcohol-sometimes">Sometimes</label>
+        <input
+          type="radio"
+          id="radio-alcohol-no"
+          name="uiAlcoholConsumption"
+          value="no"
+          checked
+        />
+        <label for="radio-alcohol-no">No</label>
+        <input
+          type="radio"
+          id="radio-alcohol-frequent"
+          name="uiAlcoholConsumption"
+          value="frequent"
+        />
+        <label for="radio-alcohol-frequent">Frequent</label>
+      </div>
+
+      <button class="submit" onclick="onClickedPredictDisease()" type="button">
+        Predict
+      </button>
+
+      <div id="uiEstimatedDisease" class="result"><h2></h2></div>
+    </form>
+  </body>
 </html>

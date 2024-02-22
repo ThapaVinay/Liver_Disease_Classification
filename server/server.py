@@ -1,26 +1,31 @@
 from flask import Flask, request, jsonify
 import util
+
 app = Flask(__name__)
 
-@app.route('/get_location_names')
-def get_location_names():
-    return "HI"
+@app.route('/predict_disease', methods=['POST'])
+def predict_disease():
+    jaundice = request.form['jaundice']
+    fatigue = request.form['fatigue']
+    discomfort = request.form['discomfort']
+    appetite = request.form['appetite']
+    urine = request.form['urine']
+    itchy_skin = request.form['itchySkin']
+    bruising = request.form['bruising']
+    nausea_vomiting = request.form['nauseaVomiting']
+    smoking_status = request.form['smokingStatus']
+    alcohol_consumption = request.form['alcoholConsumption']
 
-@app.route('/predict_liver_disease', methods=['POST'])
-def predict_home_price():
-    total_sqft = float(request.form['total_sqft'])
-    location = request.form['location']
-    bhk = int(request.form['bhk'])
-    bath = int(request.form['bath'])
+    predicted_disease = util.predict_disease(jaundice, fatigue, discomfort, appetite, urine, itchy_skin, bruising, nausea_vomiting, smoking_status, alcohol_consumption)
 
     response = jsonify({
-        'estimated_price' : util.get_estimated_price(location, total_sqft, bhk, bath)
-    })  
+        'estimated_disease': predicted_disease
+    })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
-
     return response
 
 if __name__ == "__main__":
-    print("Starting python Flask server for Home price Prediction...")
+    print("Starting Python Flask server for Disease Prediction...")
+    util.load_saved_models()
     app.run()
