@@ -53,3 +53,35 @@ function onClickedPredictDisease() {
     }
   );
 }
+
+function onClickedPredictImage() {
+  console.log("Predict image disease button clicked");
+ 
+  var fileInput = document.getElementById('imageUpload');
+  var file = fileInput.files[0];
+  if (!file) {
+     alert("Please select an image file.");
+     return;
+  }
+ 
+  var formData = new FormData();
+  formData.append('file', file);
+ 
+  var url = "http://127.0.0.1:5000/predict_image_disease";
+ 
+  $.ajax({
+     url: url,
+     type: 'POST',
+     data: formData,
+     processData: false,
+     contentType: false,
+     success: function (data) {
+       console.log(data.predicted_result);
+       var estDisease = document.getElementById("uiEstimatedImageDisease");
+       estDisease.innerHTML = "<h2>" + data.predicted_result + "</h2>";
+     },
+     error: function (error) {
+       console.error("Error:", error);
+     }
+  });
+ }
